@@ -263,7 +263,7 @@
 
         <div class="ctaRow">
           <!-- Replace with your real donation link -->
-          <a class="btn primary" href="https://https://aidsnorthbay.ca/donate/?utm_source=student_fundraiser" target="_blank" rel="noreferrer">Donate</a>
+          <a class="btn primary" href="https://aidsnorthbay.ca/donate/?utm_source=student_fundraiser" target="_blank" rel="noreferrer">Donate</a>
           <!-- Replace with your event link (Facebook/Instagram/Eventbrite/etc.) -->
           <a class="btn" href="https://example.com/event" target="_blank" rel="noreferrer">Event Details</a>
           <button class="btn ghost" type="button" id="copyLinkBtn">Copy Share Link</button>
@@ -317,7 +317,7 @@
             </div>
             <div>
               <label class="sr-only" for="donateLinkInput">Donate link</label>
-              <input id="donateLinkInput" type="text" value="https://https://aidsnorthbay.ca/donate/?utm_source=student_fundraiser" />
+              <input id="donateLinkInput" type="text" value="https://aidsnorthbay.ca/donate/?utm_source=student_fundraiser" />
               <div class="muted small">Donate URL</div>
             </div>
             <div>
@@ -445,14 +445,18 @@
           </p>
 
           <div class="ctaRow" style="margin-top:10px;">
-           <a class="btn primary" id="donateBtn"
-   href="https://aidsnorthbay.ca/donate/?utm_source=student_fundraiser"
-   target="_blank" rel="noreferrer">
-  Donate securely
-</a>
+            <a class="btn primary" id="donateBtn"
+              href="https://aidsnorthbay.ca/donate/?utm_source=student_fundraiser"
+              target="_blank" rel="noreferrer">
+              Donate securely
+            </a>
 
             <button class="btn" type="button" id="copyDonateBtn">Copy donate link</button>
           </div>
+
+          <p class="muted small" style="margin-top:10px;">
+            All donations go directly to AIDS North Bay.
+          </p>
 
           <p class="muted small" style="margin-top:12px;">
             Tip: If the committee has an official donation page, use that. People trust it more than a random e-transfer.
@@ -584,7 +588,7 @@
       raised: 0,
       date: "April 10",
       location: "North Bay",
-      donateLink: "https://https://aidsnorthbay.ca/donate/?utm_source=student_fundraiser",
+      donateLink: "https://aidsnorthbay.ca/donate/?utm_source=student_fundraiser",
       eventLink: "https://example.com/event",
       contactEmail: "fundraiser@example.com"
     };
@@ -611,7 +615,7 @@
       $("whereText").textContent = s.location || "";
 
       $("donateBtn").href = s.donateLink || "#";
-      document.querySelector('a[href="https://https://aidsnorthbay.ca/donate/?utm_source=student_fundraiser"]')?.setAttribute("href", s.donateLink || "#"); // in case
+
       const eventA = document.querySelector('a[href="https://example.com/event"]');
       if(eventA) eventA.href = s.eventLink || "#";
 
