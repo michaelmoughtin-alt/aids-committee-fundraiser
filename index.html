@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Fundraiser supporting the AIDS Committee. Donate, share, and join our event." />
+  <title>AIDS Committee Fundraiser</title>
+
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#111a33;
+      --ink:#eef2ff;
+      --muted:#b7c2ffcc;
+      --line:#2a3766;
+      --accent:#7c5cff;
+      --accent2:#2dd4bf;
+      --warn:#ff4d6d;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1080px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(124,92,255,.35), transparent 60%),
+        radial-gradient(900px 500px at 90% 0%, rgba(45,212,191,.25), transparent 55%),
+        radial-gradient(700px 400px at 50% 120%, rgba(255,77,109,.18), transparent 55%),
+        var(--bg);
+      line-height:1.45;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px}
+    header{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(10px);
+      background: rgba(11,16,32,.72);
+      border-bottom:1px solid rgba(42,55,102,.55);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      text-decoration:none;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), transparent 55%),
+        linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: var(--shadow);
+      border:1px solid rgba(255,255,255,.14);
+    }
+    .navlinks{
+      display:flex; gap:14px; flex-wrap:wrap;
+      align-items:center;
+    }
+    .navlinks a{
+      text-decoration:none;
+      color:var(--muted);
+      font-weight:650;
+      font-size:14px;
+      padding:8px 10px;
+      border-radius:12px;
+    }
+    .navlinks a:hover{background:rgba(255,255,255,.06); color:var(--ink)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      text-decoration:none;
+      font-weight:800;
+      box-shadow: 0 8px 22px rgba(0,0,0,.25);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      cursor:pointer;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.09)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(124,92,255,.95), rgba(45,212,191,.75));
+      border-color: rgba(255,255,255,.22);
+    }
+    .btn.primary:hover{background: linear-gradient(135deg, rgba(124,92,255,1), rgba(45,212,191,.9))}
+    .btn.ghost{background: transparent}
+    .pill{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color:var(--muted);
+      font-weight:700;
+      font-size:13px;
+    }
+
+    .hero{
+      padding:42px 0 10px;
+      display:grid;
+      grid-template-columns: 1.25fr .85fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr; padding-top:28px}
+    }
+    .card{
+      background: rgba(17,26,51,.75);
+      border:1px solid rgba(42,55,102,.8);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .heroMain{padding:28px}
+    h1{
+      margin:10px 0 10px;
+      font-size: clamp(32px, 5vw, 52px);
+      line-height:1.05;
+      letter-spacing:-.6px;
+    }
+    .sub{
+      color:var(--muted);
+      font-size: 16px;
+      max-width: 62ch;
+      margin: 0 0 18px;
+    }
+    .ctaRow{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+    .metaRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
+
+    .heroSide{padding:18px; display:grid; gap:12px}
+    .infoBlock{padding:16px}
+    .infoBlock h3{margin:0 0 6px; font-size:16px}
+    .infoBlock p{margin:0; color:var(--muted); font-size:14px}
+    .kvs{display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:12px}
+    .kv{
+      padding:12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+    }
+    .kv strong{display:block; font-size:14px}
+    .kv span{color:var(--muted); font-size:13px}
+
+    section{padding:22px 0}
+    .grid3{
+      display:grid; gap:14px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 900px){ .grid3{grid-template-columns: 1fr} }
+
+    .pad{padding:18px}
+    h2{margin:0 0 10px; font-size:22px}
+    .muted{color:var(--muted)}
+    .small{font-size:14px}
+    .list{margin:10px 0 0; padding-left:18px; color:var(--muted)}
+    .list li{margin:6px 0}
+
+    .progressWrap{margin-top:10px}
+    .bar{
+      height:14px; border-radius:999px;
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      overflow:hidden;
+    }
+    .bar > div{
+      height:100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transition: width .5s ease;
+    }
+    .progressMeta{
+      display:flex; justify-content:space-between; gap:10px;
+      color:var(--muted); font-weight:700; font-size:13px;
+      margin-top:8px; flex-wrap:wrap;
+    }
+
+    .faq details{
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:16px;
+      background: rgba(255,255,255,.04);
+      padding:12px 14px;
+    }
+    .faq summary{
+      cursor:pointer;
+      font-weight:800;
+    }
+    .faq p{color:var(--muted); margin:10px 0 0}
+
+    form{
+      display:grid; gap:10px;
+      margin-top:12px;
+    }
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      color:var(--ink);
+      outline:none;
+    }
+    textarea{min-height:120px; resize:vertical}
+    input:focus, textarea:focus{border-color: rgba(124,92,255,.7)}
+    footer{
+      padding:26px 0 46px;
+      border-top:1px solid rgba(42,55,102,.55);
+      color:var(--muted);
+    }
+    .split{
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      align-items:center;
+    }
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      font-weight:800; color:var(--muted);
+      font-size:13px;
+    }
+    .sr-only{
+      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top">
+        <span class="logo" aria-hidden="true"></span>
+        <span>Fundraiser for the AIDS Committee</span>
+      </a>
+
+      <nav class="navlinks" aria-label="Primary">
+        <a href="#event">Event</a>
+        <a href="#impact">Impact</a>
+        <a href="#donate">Donate</a>
+        <a href="#sponsors">Sponsors</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a class="btn primary" href="#donate">Donate Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="wrap">
+    <div class="hero">
+      <div class="card heroMain">
+        <span class="pill">❤️ Community fundraiser • <span id="yearLabel"></span></span>
+        <h1>Show up. Give a little. Keep people safer.</h1>
+        <p class="sub">
+          We’re raising money to support local HIV/AIDS services: harm reduction, outreach, peer support,
+          education, and practical help for people who need it.
+        </p>
+
+        <div class="ctaRow">
+          <!-- Replace with your real donation link -->
+          <a class="btn primary" href="https://example.com/donate" target="_blank" rel="noreferrer">Donate</a>
+          <!-- Replace with your event link (Facebook/Instagram/Eventbrite/etc.) -->
+          <a class="btn" href="https://example.com/event" target="_blank" rel="noreferrer">Event Details</a>
+          <button class="btn ghost" type="button" id="copyLinkBtn">Copy Share Link</button>
+        </div>
+
+        <div class="metaRow">
+          <span class="tag">Goal: <span id="goalText">$1,500</span></span>
+          <span class="tag">Raised: <span id="raisedText">$0</span></span>
+          <span class="tag">Date: <span id="dateText">April 10</span></span>
+          <span class="tag">Location: <span id="locationText">North Bay</span></span>
+        </div>
+
+        <div class="progressWrap" aria-label="Fundraising progress">
+          <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="1500" aria-valuenow="0">
+            <div id="barFill"></div>
+          </div>
+          <div class="progressMeta">
+            <span id="progressLabel">0% funded</span>
+            <span class="muted small">Updated manually in the settings below</span>
+          </div>
+        </div>
+
+        <!-- QUICK SETTINGS (edit these numbers/texts) -->
+        <div class="card" style="margin-top:18px; padding:16px;">
+          <h2 style="margin:0 0 8px; font-size:16px;">Quick settings</h2>
+          <p class="muted small" style="margin:0 0 12px;">
+            Change these values to match your fundraiser. No code skills required beyond typing.
+          </p>
+          <div class="grid3">
+            <div>
+              <label class="sr-only" for="goalInput">Goal</label>
+              <input id="goalInput" type="number" min="0" value="1500" />
+              <div class="muted small">Goal (CAD)</div>
+            </div>
+            <div>
+              <label class="sr-only" for="raisedInput">Raised</label>
+              <input id="raisedInput" type="number" min="0" value="0" />
+              <div class="muted small">Raised (CAD)</div>
+            </div>
+            <div>
+              <label class="sr-only" for="dateInput">Date</label>
+              <input id="dateInput" type="text" value="April 10" />
+              <div class="muted small">Event date</div>
+            </div>
+          </div>
+          <div class="grid3" style="margin-top:10px;">
+            <div>
+              <label class="sr-only" for="locationInput">Location</label>
+              <input id="locationInput" type="text" value="North Bay" />
+              <div class="muted small">Location</div>
+            </div>
+            <div>
+              <label class="sr-only" for="donateLinkInput">Donate link</label>
+              <input id="donateLinkInput" type="text" value="https://example.com/donate" />
+              <div class="muted small">Donate URL</div>
+            </div>
+            <div>
+              <label class="sr-only" for="eventLinkInput">Event link</label>
+              <input id="eventLinkInput" type="text" value="https://example.com/event" />
+              <div class="muted small">Event URL</div>
+            </div>
+          </div>
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn primary" type="button" id="applyBtn">Apply updates</button>
+            <button class="btn" type="button" id="resetBtn">Reset to defaults</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card heroSide">
+        <div class="card infoBlock">
+          <h3>What this supports</h3>
+          <p>Direct community services and practical supports: prevention, outreach, education, and peer-based care.</p>
+
+          <div class="kvs">
+            <div class="kv">
+              <strong>Low barrier</strong>
+              <span>Help people access support without hoops.</span>
+            </div>
+            <div class="kv">
+              <strong>Community-led</strong>
+              <span>That “people helping people” energy.</span>
+            </div>
+            <div class="kv">
+              <strong>Stigma-resistant</strong>
+              <span>Care, not judgment. Ever.</span>
+            </div>
+            <div class="kv">
+              <strong>Impact-focused</strong>
+              <span>Real help in real time.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card infoBlock">
+          <h3>How to help (besides donating)</h3>
+          <ul class="list">
+            <li>Share the link in group chats.</li>
+            <li>Bring a friend to the event.</li>
+            <li>Ask your workplace about matching donations.</li>
+            <li>Sponsor a small prize or snack table.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <section id="event">
+      <div class="grid3">
+        <div class="card pad">
+          <h2>Event details</h2>
+          <p class="muted">Put the basics here so nobody has to DM you 17 questions.</p>
+          <ul class="list">
+            <li><strong>When:</strong> <span id="whenText">April 10</span></li>
+            <li><strong>Where:</strong> <span id="whereText">North Bay</span></li>
+            <li><strong>What:</strong> Community fundraiser + good vibes + helping people.</li>
+            <li><strong>Bring:</strong> Yourself, a buddy, and maybe a little cash for the jar.</li>
+          </ul>
+        </div>
+
+        <div class="card pad">
+          <h2>What we’re doing</h2>
+          <p class="muted small">
+            Replace this with the real fundraiser format (raffle, bake sale, show, trivia, etc.).
+          </p>
+          <ul class="list">
+            <li>Raffle / prizes</li>
+            <li>Snack table</li>
+            <li>Music / games</li>
+            <li>Short speech: where the money goes</li>
+          </ul>
+        </div>
+
+        <div class="card pad">
+          <h2>Where the money goes</h2>
+          <p class="muted">
+            Keep this grounded and specific. People trust clarity.
+          </p>
+          <ul class="list">
+            <li>Harm reduction supplies + outreach</li>
+            <li>Education and prevention</li>
+            <li>Peer support and navigation</li>
+            <li>Practical assistance for community members</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="impact">
+      <div class="card pad">
+        <h2>Why this matters</h2>
+        <p class="muted">
+          HIV/AIDS work isn’t a historical footnote. It’s ongoing. Funding helps keep services stable,
+          reduces harm, and supports people with dignity.
+        </p>
+        <div class="grid3" style="margin-top:12px;">
+          <div class="kv">
+            <strong>Prevention</strong>
+            <span>Education + safer access = fewer barriers.</span>
+          </div>
+          <div class="kv">
+            <strong>Support</strong>
+            <span>Peer and practical help when life is heavy.</span>
+          </div>
+          <div class="kv">
+            <strong>Community health</strong>
+            <span>Services that benefit everyone, not just “clients.”</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="donate">
+      <div class="grid3">
+        <div class="card pad" style="grid-column: span 2;">
+          <h2>Donate</h2>
+          <p class="muted">
+            If you can give, amazing. If you can’t, share the link and show up.
+            Either way: you’re part of this.
+          </p>
+
+          <div class="ctaRow" style="margin-top:10px;">
+            <a class="btn primary" id="donateBtn" href="https://example.com/donate" target="_blank" rel="noreferrer">Donate securely</a>
+            <button class="btn" type="button" id="copyDonateBtn">Copy donate link</button>
+          </div>
+
+          <p class="muted small" style="margin-top:12px;">
+            Tip: If the committee has an official donation page, use that. People trust it more than a random e-transfer.
+          </p>
+        </div>
+
+        <div class="card pad">
+          <h2>Share text</h2>
+          <p class="muted small">Copy/paste this into socials or a group chat:</p>
+          <div class="kv" style="margin-top:10px;">
+            <strong>Message</strong>
+            <span id="shareText" class="muted">
+              We’re fundraising for the AIDS Committee to support local HIV/AIDS services. If you can donate or share, it helps a lot: [link]
+            </span>
+          </div>
+          <div class="ctaRow" style="margin-top:10px;">
+            <button class="btn" type="button" id="copyShareTextBtn">Copy message</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sponsors">
+      <div class="card pad">
+        <h2>Sponsors & supporters</h2>
+        <p class="muted">
+          Add logos later, but start with names. This section also nudges people to chip in.
+        </p>
+        <div class="grid3" style="margin-top:12px;">
+          <div class="kv"><strong>Bronze</strong><span class="muted">Your sponsor name here</span></div>
+          <div class="kv"><strong>Silver</strong><span class="muted">Your sponsor name here</span></div>
+          <div class="kv"><strong>Gold</strong><span class="muted">Your sponsor name here</span></div>
+        </div>
+        <p class="muted small" style="margin-top:12px;">
+          Want to sponsor? Email us at <span id="emailText">fundraiser@example.com</span>.
+        </p>
+      </div>
+    </section>
+
+    <section id="faq" class="faq">
+      <div class="card pad">
+        <h2>FAQ</h2>
+        <div style="display:grid; gap:10px; margin-top:12px;">
+          <details>
+            <summary>Is this an official committee fundraiser?</summary>
+            <p>Write the truth here: “Yes, run with the committee” or “Community-led fundraiser supporting the committee.”</p>
+          </details>
+          <details>
+            <summary>Where can I donate?</summary>
+            <p>Link to the official donation page if available. If you’re using e-transfer, specify the email and instructions clearly.</p>
+          </details>
+          <details>
+            <summary>Can my workplace match donations?</summary>
+            <p>Often yes. Ask HR about donation matching or community giving programs.</p>
+          </details>
+          <details>
+            <summary>What if I can’t donate?</summary>
+            <p>Share the link, come to the event, or volunteer. Those matter a lot.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="grid3">
+        <div class="card pad" style="grid-column: span 2;">
+          <h2>Contact</h2>
+          <p class="muted">
+            This form works if you connect it to Formspree (free) or Netlify Forms.
+            Otherwise, delete it and just put an email.
+          </p>
+
+          <!-- OPTION A: Formspree (replace action URL) -->
+          <form action="https://formspree.io/f/yourFormId" method="POST">
+            <label>
+              <span class="sr-only">Your name</span>
+              <input name="name" placeholder="Your name" required />
+            </label>
+            <label>
+              <span class="sr-only">Email</span>
+              <input name="email" type="email" placeholder="Email" required />
+            </label>
+            <label>
+              <span class="sr-only">Message</span>
+              <textarea name="message" placeholder="Message" required></textarea>
+            </label>
+            <button class="btn primary" type="submit">Send message</button>
+          </form>
+
+          <p class="muted small" style="margin-top:10px;">
+            If you don’t want a form: remove it and just list a contact email + Instagram.
+          </p>
+        </div>
+
+        <div class="card pad">
+          <h2>Organizers</h2>
+          <p class="muted small">Replace these with your group members:</p>
+          <ul class="list">
+            <li>Mike</li>
+            <li>Gabe</li>
+            <li>Katherine</li>
+            <li>MacKenzie</li>
+            <li>Maddie</li>
+            <li>Chad</li>
+          </ul>
+          <p class="muted small" style="margin-top:10px;">
+            Email: <span id="emailText2">fundraiser@example.com</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="split">
+        <div>
+          <div style="font-weight:900; color:var(--ink);">Fundraiser for the AIDS Committee</div>
+          <div class="muted small">Made with stubborn optimism and a mildly threatening deadline.</div>
+        </div>
+        <div class="muted small">© <span id="yearLabel2"></span> • Built by your team</div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    const defaults = {
+      goal: 1500,
+      raised: 0,
+      date: "April 10",
+      location: "North Bay",
+      donateLink: "https://example.com/donate",
+      eventLink: "https://example.com/event",
+      contactEmail: "fundraiser@example.com"
+    };
+
+    function money(n){
+      try{
+        return new Intl.NumberFormat("en-CA", { style:"currency", currency:"CAD", maximumFractionDigits:0 }).format(n);
+      }catch{
+        return "$" + Math.round(n).toLocaleString();
+      }
+    }
+
+    function applySettings(s){
+      const goal = Math.max(0, Number(s.goal) || 0);
+      const raised = Math.max(0, Number(s.raised) || 0);
+      const pct = goal > 0 ? Math.min(100, Math.round((raised / goal) * 100)) : 0;
+
+      $("goalText").textContent = money(goal);
+      $("raisedText").textContent = money(raised);
+      $("dateText").textContent = s.date || "";
+      $("locationText").textContent = s.location || "";
+
+      $("whenText").textContent = s.date || "";
+      $("whereText").textContent = s.location || "";
+
+      $("donateBtn").href = s.donateLink || "#";
+      document.querySelector('a[href="https://example.com/donate"]')?.setAttribute("href", s.donateLink || "#"); // in case
+      const eventA = document.querySelector('a[href="https://example.com/event"]');
+      if(eventA) eventA.href = s.eventLink || "#";
+
+      const bar = $("barFill");
+      bar.style.width = pct + "%";
+
+      const prog = document.querySelector('[role="progressbar"]');
+      prog.setAttribute("aria-valuemax", String(goal));
+      prog.setAttribute("aria-valuenow", String(raised));
+
+      $("progressLabel").textContent = `${pct}% funded`;
+
+      const shareMsg = `We’re fundraising for the AIDS Committee to support local HIV/AIDS services. If you can donate or share, it helps a lot: ${location.href}`;
+      $("shareText").textContent = shareMsg;
+
+      $("emailText").textContent = s.contactEmail || defaults.contactEmail;
+      $("emailText2").textContent = s.contactEmail || defaults.contactEmail;
+    }
+
+    function readInputs(){
+      return {
+        goal: $("goalInput").value,
+        raised: $("raisedInput").value,
+        date: $("dateInput").value,
+        location: $("locationInput").value,
+        donateLink: $("donateLinkInput").value,
+        eventLink: $("eventLinkInput").value,
+        contactEmail: defaults.contactEmail
+      };
+    }
+
+    async function copy(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        return true;
+      }catch{
+        return false;
+      }
+    }
+
+    $("applyBtn").addEventListener("click", () => applySettings(readInputs()));
+    $("resetBtn").addEventListener("click", () => {
+      $("goalInput").value = defaults.goal;
+      $("raisedInput").value = defaults.raised;
+      $("dateInput").value = defaults.date;
+      $("locationInput").value = defaults.location;
+      $("donateLinkInput").value = defaults.donateLink;
+      $("eventLinkInput").value = defaults.eventLink;
+      applySettings(defaults);
+    });
+
+    $("copyLinkBtn").addEventListener("click", async () => {
+      const ok = await copy(location.href);
+      $("copyLinkBtn").textContent = ok ? "Copied!" : "Copy failed";
+      setTimeout(() => $("copyLinkBtn").textContent = "Copy Share Link", 1200);
+    });
+
+    $("copyDonateBtn").addEventListener("click", async () => {
+      const link = $("donateBtn").href;
+      const ok = await copy(link);
+      $("copyDonateBtn").textContent = ok ? "Copied!" : "Copy failed";
+      setTimeout(() => $("copyDonateBtn").textContent = "Copy donate link", 1200);
+    });
+
+    $("copyShareTextBtn").addEventListener("click", async () => {
+      const ok = await copy($("shareText").textContent);
+      $("copyShareTextBtn").textContent = ok ? "Copied!" : "Copy failed";
+      setTimeout(() => $("copyShareTextBtn").textContent = "Copy message", 1200);
+    });
+
+    const year = new Date().getFullYear();
+    $("yearLabel").textContent = year;
+    $("yearLabel2").textContent = year;
+
+    // initial
+    applySettings(defaults);
+  </script>
+</body>
+</html>
